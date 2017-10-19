@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import PropTypes from 'prop-types';
-import './App.css';
 
-class App extends Component {
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      txt: "This is state txt of Duoc",
+      cat: 0
+    }
+  }
+  update(e) {
+    this.setState({txt: e.target.value})
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <h1>Hello world! {this.state.txt} - {this.state.cat}</h1>
+        <Widget update={this.update.bind(this)}/>
+        <Widget update={this.update.bind(this)}/>
+        <Widget update={this.update.bind(this)}/>
       </div>
     );
   }
 }
 
+const Widget = (props) => <input type='text' onChange={props.update}/>
 export default App;
+  
