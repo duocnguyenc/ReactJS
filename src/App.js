@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import PropTypes from 'prop-types';
-import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Title text="123456"/>
     );
+  }
+}
+const Title =  (props) => <h1> Title: {props.text}</h1>
+
+Title.propTypes = {
+  text(props, propName, component) {
+    if (!(propName in props)) {
+      return new Error(`Missing ${propName}`)
+    }
+    if (props[propName].length < 6) {
+      return new Error(`${propName} is too short`)
+    }
   }
 }
 
