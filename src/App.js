@@ -1,21 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import PropTypes from 'prop-types';
-import './App.css';
+import ReactDOM from 'react-dom';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {a: ''}
+  }
+  update() {
+    this.setState({
+      a: ReactDOM.findDOMNode(this.a).value,
+      b: this.refs.b.value,
+    })
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <Input ref={commponent => this.a = commponent}
+          update =  {this.update.bind(this)}
+        />  {this.state.a}
+        <hr />
+        <input type='text' ref='b'
+          onChange =  {this.update.bind(this)}
+        />  {this.state.b}
       </div>
     );
+  }
+}
+
+class Input extends Component {
+  render() {
+    return <input type='text' onChange={this.props.update} />
   }
 }
 
